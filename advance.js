@@ -33,3 +33,22 @@ for(let i=0;i<10000000000;i++){
     a+=i;
 }
 console.log(a);
+
+//here the setTimeout anonymous function waits in callback queue
+//callback functions actually make more sense inside a async function
+
+//Promises are syntactical way of making async codes look readlable
+//We create a wrapper on top of other async functions and make it look readable, fs.readFile is also a wrapper around some async function 
+
+function RohFile(cb){
+    fs.readFile("a.txt","utf-8",function(err,data){
+        cb(data);
+    });
+}
+function onDone(cb){//callback function
+    console.log(data);
+}
+RohFile(onDone);//an example of promises
+
+
+
