@@ -1,5 +1,5 @@
 //we can context switch between tasks or we can delegate tasks to other parts 
-//JS is singe threaded yet can do the above mentioned things
+//JS is singel threaded yet can do the above mentioned things
 //by default all things are synchronous in JS
 
 function findSum(n){
@@ -15,9 +15,9 @@ function findSumTill100(){
 setTimeout(findSumTill100,1000);//This setTimeout is inbuilt and delegates work to some other thread 
 console.log("Kaise ho bhai github master");
 
-//common async functions are=> setTimeout , fs.readFile-to read a file from your filesyatem, Fetch-to fech some data from an ApiEndPoint (like sending a nw request)
+//common async functions are=> setTimeout , fs.readFile-to read a file from your filesyatem, fech some data from an ApiEndPoint (like sending a nw request)
 
-const fs= require("fs");//stands for filesystem and suppourts I/O operations on a file
+const fs= require("fs");//stands for filesystem and suppourts I/O operations on a file basically file reading and writing
 const { resolve } = require("path");
 fs.readFile("a.txt","utf-8",function(err,data){
     console.log(data);
@@ -53,7 +53,7 @@ function onDone(cb){//callback function
 }
 RohFile.then(onDone);//an example of promises
 
-//a promise can have 3 forms pending,resolved and 
+//a promise can have 3 forms pending,resolved and rejected
 
 function putCopyrightToFile(cb){
     fs.readFile("a.txt","utf-8",(err,data)=>{
@@ -72,7 +72,7 @@ putCopyrightToFile(function(){
 //non promisified takes in a callback where as other doesnt and it returns a promise 
 
 //returning a promise
-function promisidiedMyOwnSetTimeout(duration){
+function promisifiedMyOwnSetTimeout(duration){
     const p=new Promise(function(resolve){
         setTimeout(function(){
             resolve();
@@ -80,24 +80,37 @@ function promisidiedMyOwnSetTimeout(duration){
     });
     return p;
 }
-const ans=promisidiedMyOwnSetTimeout(1000);
-addEventListener.then(function(){
+const ans=promisifiedMyOwnSetTimeout(1000);
+ans.then(function(){
     console.log("timeout is done");
 });
 
-//non-promisified async
+//non-promisified async , here u callback something that an end user gave us 
 
 function nonpromisifiesMyOwnSetTimeout(callback,duration){
     setTimeout(function(){
       callback();
     },duration);
 }
-//01:34:27 i had stopped here
 
+var p=new Promise(function(onDone){
+    onDone();
+});
 
+//Async Await
+//it still uses promises or callbacks in the background
 
+function sakureadsfile(){
+    let p =new Promise(function(resolve){
+        setTimeout(function(){
+            resolve("hi there")
+        },1000)
+    })
+    return p;
+}
 
-
-
-
-
+async function main() {
+    let value = await sakureadsfile();//instead of writing .then use await
+    console.log(value);
+}
+main();

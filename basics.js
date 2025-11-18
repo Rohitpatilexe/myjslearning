@@ -90,5 +90,3 @@ const users={
 //JSON.parse and JSON.stringify are used to convert 
 const finalString=JSON.stringify(users);
 console.log(finalString);
-
-
