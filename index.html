@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="FirstContainer" type="text" placeholder="First number"></input> <br></br>
+    <input id="SecondContainer" type="text" placeholder="Second number"></input><br></br>
+    <button onclick="onpopulateDiv()">Calculate sum</button><br></br>
+    <div id="Finalsum"></div>
+</body>
+<script>
+//     <!-- debouncing 
+// we use this when we want to send signals with some delays -->
+let timeout;
+    function debouncePopulateDiv(){
+    // <!-- delay the call to populatediv until ive not been called for 100ms-->
+    clearTimeout(timeout);
+     const timeout=setTimeout(function(){
+        populatediv()
+     },100)
+     
+} 
+    function onpopulateDiv(){
+        const a =document.getElementById("FirstContainer").value;
+        const b=document.getElementById("SecondContainer").value;
+        const element=document.getElementById("Finalsum")
+        element.innerHTML=parseInt(a)+parseInt(b);
+    }
+</script>
+
+<!-- if you want to hit a backend server, use fetch(url) . And use async await to log this output which is received from the backend -->
+<!-- This is called CORS croos operations resource sharing -->
+</html>
+
+
