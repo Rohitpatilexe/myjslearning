@@ -57,3 +57,47 @@ app.get('/protected', authenticationToken, (req, res) => {
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
 });
+//cryptography jargons
+//Hashing,it is one directional
+//when u enter a password , it is actually stored in a hash form in backend , as it is not safe to store it literally how it is 
+//so we can never decrypt back when it is stored once in the DB
+//first when re logging in the pass is changed to hash in the inmemory backend itself
+
+
+//Encryption
+//encryption is 2 way , encryption does require a password
+
+//JWT
+//the thing about jwt is if u have the token , you can actually decrypt back to the orignal content
+//it is store in application=>localstorage
+//these are stored in guthubsecrets
+
+
+//we use mongoose to talk to our MongoDb
+const mongoose=require('mongoose');
+mongoose.connect("URL");
+const Cat=mongoose.mode;('Users',{name:String,email:String,password:String});
+const user=new user({
+    name:"rohit",
+    email:'sdef@gmail.com',
+    password:'erf3t3t'
+});
+user.save();
+
+//now we can put this into a post route
+
+app.post("/signup",(req,res)=>{
+    const username=req.body.username;
+    const password=req.body.password;
+    const name=req.body.name;
+
+    const user=new user({
+    name:name,
+    email:email,
+    password:password
+});
+    user.save();   
+    res.json({
+        message:'succesfully created ur slot'
+    })
+});
