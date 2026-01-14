@@ -52,6 +52,9 @@ app.get('/',(req,res)=>{
 app.get("/test", (req, res) => {
   res.send("Test route ok");
 }); 
+app.get("/token-wanted",(req,res)=>{
+    res.send("Expecting a token ?Kindly use inspect element and find in the media section");
+})
 app.listen(PORT,()=>{
     console.log(`Server running on http://localhost:${PORT}`);
 })

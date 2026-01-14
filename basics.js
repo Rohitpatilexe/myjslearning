@@ -90,3 +90,13 @@ const users={
 //JSON.parse and JSON.stringify are used to convert 
 const finalString=JSON.stringify(users);
 console.log(finalString);
+
+//inorder to do deep-copy
+const original = { name: "Matrix", details: { year: 1999 } };
+
+// The "Hack"
+const clone = JSON.parse(JSON.stringify(original));
+
+clone.details.year = 2024;
+
+console.log(original.details.year); // 1999 (Safe! The original didn't change)

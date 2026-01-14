@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input id="title" type="text" placeholder="title"><br>
+        <input id="description" type="text" placeholder="Description"><br>
+        <button onclick="addToDo()">Add task</button>
+    </div>
+    
+</body>
+<script>
+    function addToDo(){
+        const title=document.getElementById("title").value;
+        const description=document.getElementById("description").value;
+        console.log(title);
+        console.log(description);
+        const OuterDiv=document.createElement("div");
+        OuterDiv.innerHTML="sakib hussain";
+        document.getElementById("description").appendChild(OuterDiv);//how u dynamically add div
+    }
+</script>
+</html>
