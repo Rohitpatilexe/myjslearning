@@ -64,7 +64,7 @@ function putCopyrightToFile(cb){
     });
 }
 putCopyrightToFile(function(){
-    console.log("copyright has been put");
+    console.log("copyright has been installed");
 })
 
 //There are 2 ways of creating async await function 
