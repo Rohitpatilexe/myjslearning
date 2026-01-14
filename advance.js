@@ -72,6 +72,7 @@ putCopyrightToFile(function(){
 //non promisified takes in a callback where as other doesnt and it returns a promise 
 
 //returning a promise
+// A promise is a special JavaScript object that links the “producing code” and the “consuming code” together. In terms of our analogy: this is the “subscription list”. The “producing code” takes whatever time it needs to produce the promised result, and the “promise” makes that result available to all of the subscribed code when it’s ready.
 function promisifiedMyOwnSetTimeout(duration){
     const p=new Promise(function(resolve){
         setTimeout(function(){
