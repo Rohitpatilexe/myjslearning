@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Promise POC: Lazy Loader</title>
+    <style>
+        body { font-family: sans-serif; padding: 50px; text-align: center; }
+        button { padding: 15px 30px; font-size: 18px; margin: 10px; cursor: pointer; }
+        .success { background-color: #4CAF50; color: white; border: none; }
+        .fail { background-color: #f44336; color: white; border: none; }
+    </style>
+</head>
+<body>
+
+    <h2>The Lazy-Loading Experiment</h2>
+    <p>Open your "Network" tab in Developer Tools (F12) to see the magic.</p>
+
+    <button onclick="loadRealLibrary()" class="success">Load Magic (Success)</button>
+
+    <button onclick="loadBrokenLibrary()" class="fail">Load Broken (Error)</button>
+
+    <script>
+        // ---------------------------------------------------------
+        // PART 1: The "Engine" (Our Promise-based loadScript)
+        // ---------------------------------------------------------
+        function loadScript(src) {
+            return new Promise(function(resolve, reject) {
+                // 1. Create the script tag
+                let script = document.createElement('script');
+                script.src = src;
+
+                // 2. Handle Success (Resolve)
+                script.onload = () => resolve(script);
+
+                // 3. Handle Failure (Reject)
+                script.onerror = () => reject(new Error(`Script load error for ${src}`));
+
+                // 4. Trigger the download
+                document.head.append(script);
+            });
+        }
+
+        // ---------------------------------------------------------
+        // PART 2: The "Consumer" (Using the Promise)
+        // ---------------------------------------------------------
+        
+        // Scenario A: Everything works
+        function loadRealLibrary() {
+            console.log("Attempting to load SweetAlert...");
+            
+            loadScript('https://cdn.jsdelivr.net/npm/sweetalert2@11')
+                .then(script => {
+                    // This ONLY runs if the script loaded successfully
+                    console.log("Library loaded!");
+                    
+                    // We can now use functions from that library
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'The script was loaded dynamically.',
+                        icon: 'success'
+                    });
+                })
+                .catch(error => {
+                    // This runs if internet is down or URL is wrong
+                    console.error(error);
+                    alert("Something went wrong: " + error.message);
+                });
+        }
+
+        // Scenario B: The link is broken
+        function loadBrokenLibrary() {
+            console.log("Attempting to load fake script...");
+
+            loadScript('https://example.com/this-does-not-exist.js')
+                .then(script => {
+                    console.log("This will never run.");
+                })
+                .catch(error => {
+                    // We expect to end up here!
+                    console.log("Caught the error successfully!");
+                    alert("Error Handler Worked!\n\n" + error.message);
+                });
+        }
+    </script>
+</body>
+</html>
