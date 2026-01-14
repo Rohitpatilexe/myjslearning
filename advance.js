@@ -96,6 +96,19 @@ function nonpromisifiesMyOwnSetTimeout(callback,duration){
 var p=new Promise(function(onDone){
     onDone();
 });
+// How can we load two scripts sequentially: the first one, and then the second one after it?
+
+// The natural solution would be to put the second loadScript call inside the callback, like this:
+
+loadScript('/my/script.js', function(script) {
+
+  alert(`Cool, the ${script.src} is loaded, let's load one more`);
+
+  loadScript('/my/script2.js', function(script) {
+    alert(`Cool, the second script is loaded`);
+  });
+
+});
 
 //Async Await
 //it still uses promises or callbacks in the background
