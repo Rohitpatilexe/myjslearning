@@ -64,7 +64,7 @@ function putCopyrightToFile(cb){
     });
 }
 putCopyrightToFile(function(){
-    console.log("copyright has been put");
+    console.log("copyright has been installed");
 })
 
 //There are 2 ways of creating async await function 
@@ -72,6 +72,7 @@ putCopyrightToFile(function(){
 //non promisified takes in a callback where as other doesnt and it returns a promise 
 
 //returning a promise
+// A promise is a special JavaScript object that links the “producing code” and the “consuming code” together. In terms of our analogy: this is the “subscription list”. The “producing code” takes whatever time it needs to produce the promised result, and the “promise” makes that result available to all of the subscribed code when it’s ready.
 function promisifiedMyOwnSetTimeout(duration){
     const p=new Promise(function(resolve){
         setTimeout(function(){
@@ -95,6 +96,19 @@ function nonpromisifiesMyOwnSetTimeout(callback,duration){
 
 var p=new Promise(function(onDone){
     onDone();
+});
+// How can we load two scripts sequentially: the first one, and then the second one after it?
+
+// The natural solution would be to put the second loadScript call inside the callback, like this:
+
+loadScript('/my/script.js', function(script) {
+
+  alert(`Cool, the ${script.src} is loaded, let's load one more`);
+
+  loadScript('/my/script2.js', function(script) {
+    alert(`Cool, the second script is loaded`);
+  });
+
 });
 
 //Async Await
